@@ -22,7 +22,7 @@ public class CourseTest {
         testStudent = new Student(1, "anna", "anna@gmail.com", "Storgatan 1");
         testStudent2 = new Student(2 , "Anders", "anders@gmail.com", "Parkgatan 2");
         students = new ArrayList<>(Arrays.asList(testStudent));
-        course = new Course(1, "Matematik", LocalDate.parse("2019-08-03"), 6, students);
+        course = new Course(1, "Matematik", LocalDate.parse("2019-08-03"), 6);
     }
 
     @Test
@@ -31,7 +31,6 @@ public class CourseTest {
         Assert.assertEquals("Matematik", course.getCourseName());
         Assert.assertEquals(LocalDate.parse("2019-08-03"), course.getStartDate());
         Assert.assertEquals(6, course.getWeekDuration());
-        Assert.assertEquals(students, course.getStudentList());
     }
 
     @Test

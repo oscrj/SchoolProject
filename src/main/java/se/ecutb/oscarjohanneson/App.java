@@ -31,9 +31,7 @@ public class App {
                     break;
                 default:
                     System.out.println("\nYou have to enter a number between 1-4 or Q");
-
             }
-
         }
     }
 
