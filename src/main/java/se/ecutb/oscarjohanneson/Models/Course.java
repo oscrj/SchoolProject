@@ -1,6 +1,7 @@
 package se.ecutb.oscarjohanneson.Models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,20 +12,20 @@ public class Course {
     private String courseName;
     private LocalDate startDate;
     private int weekDuration;
-    private List<Student> studentList;
+    private List<Student> students;
 
     //Constructor used for testing.
-    public Course(int id, String courseName, LocalDate startDate, int weekDuration, List<Student> studentList) {
+    public Course(int id, String courseName, LocalDate startDate, int weekDuration) {
         this.id = id;
         this.courseName = courseName;
         this.startDate = startDate;
         this.weekDuration = weekDuration;
-        this.studentList = studentList;
+        this.students = new ArrayList<>();
     }
 
     //Constructor used for creating a course.
-    public Course(String courseName, LocalDate startDate, int weekDuration, List<Student> studentList){
-        this(++idCounter, courseName, startDate, weekDuration, studentList);
+    public Course(String courseName, LocalDate startDate, int weekDuration){
+        this(++idCounter, courseName, startDate, weekDuration);
     }
 
     //Getters and Setters
@@ -57,30 +58,29 @@ public class Course {
     }
 
     public List<Student> getStudentList() {
-        return studentList;
+        return students;
     }
 
     public void setStudentList(List<Student> studentList) {
-        this.studentList = studentList;
+        this.students = studentList;
     }
 
     //Method to add a student to course.
     public void register(Student student){
         //If student already is registered to this course.
-        if(studentList.contains(student)){
+        if(students.contains(student)){
             System.out.println(student + " is already registered to this course.");
         }else{
             //Adding student to studentList.
-            studentList.add(student);
+            students.add(student);
             System.out.println(student + " was added to this course");
         }
-
     }
 
     //Method to remove a student from course.
     public void unregister(Student student){
         //Remove student from studentList.
-        studentList.remove(student);
+        students.remove(student);
     }
 
     @Override
@@ -92,11 +92,11 @@ public class Course {
                 weekDuration == course.weekDuration &&
                 Objects.equals(courseName, course.courseName) &&
                 Objects.equals(startDate, course.startDate) &&
-                Objects.equals(studentList, course.studentList);
+                Objects.equals(students, course.students);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, courseName, startDate, weekDuration, studentList);
+        return Objects.hash(id, courseName, startDate, weekDuration, students);
     }
 }
