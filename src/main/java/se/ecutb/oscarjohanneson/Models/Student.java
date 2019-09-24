@@ -1,4 +1,4 @@
-package se.ecutb.oscarjohanneson.ModelsTest;
+package se.ecutb.oscarjohanneson.Models;
 
 import java.util.Objects;
 
