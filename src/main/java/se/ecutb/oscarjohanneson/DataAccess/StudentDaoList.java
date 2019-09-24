@@ -16,10 +16,11 @@ public class StudentDaoList implements StudentDao {
     @Override
     public Student saveStudent(Student student) {
         if(students.contains(student)){
-            System.out.println(student + " is already attending this course.");
+            System.out.println(student.getName() + " is already attending this course.");
             return null;
         }else{
             students.add(student);
+            System.out.println(student.getName() + " was added.");
             return student;
         }
     }
@@ -51,7 +52,7 @@ public class StudentDaoList implements StudentDao {
                 return students;
             }
         }
-        System.out.println("Student not found");
+        System.out.println("Student " + name + " not found");
         return null;
     }
 

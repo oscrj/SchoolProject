@@ -69,11 +69,11 @@ public class Course {
     public void register(Student student){
         //If student already is registered to this course.
         if(students.contains(student)){
-            System.out.println(student + " is already registered to this course.");
+            System.out.println(student.getName() + " is already registered to this course.");
         }else{
             //Adding student to studentList.
             students.add(student);
-            System.out.println(student + " was added to this course");
+            System.out.println(student.getName() + " was added to this course");
         }
     }
 
@@ -81,6 +81,7 @@ public class Course {
     public void unregister(Student student){
         //Remove student from studentList.
         students.remove(student);
+        System.out.println(student.getName() + " was removed.");
     }
 
     @Override
