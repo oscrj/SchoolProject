@@ -57,12 +57,12 @@ public class Course {
         this.weekDuration = weekDuration;
     }
 
-    public List<Student> getStudentList() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudentList(List<Student> studentList) {
-        this.students = studentList;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     //Method to add a student to course.
@@ -79,9 +79,13 @@ public class Course {
 
     //Method to remove a student from course.
     public void unregister(Student student){
-        //Remove student from studentList.
-        students.remove(student);
-        System.out.println(student.getName() + " was removed.");
+        if(students.contains(student)){
+            //Remove student from studentList.
+            students.remove(student);
+            System.out.println(student.getName() + " was removed.");
+        }else{
+            System.out.println("No object was found.");
+        }
     }
 
     @Override

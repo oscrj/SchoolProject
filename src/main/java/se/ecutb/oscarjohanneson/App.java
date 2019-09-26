@@ -1,9 +1,14 @@
 package se.ecutb.oscarjohanneson;
 
+import se.ecutb.oscarjohanneson.DataAccess.CourseDaoList;
+import se.ecutb.oscarjohanneson.DataAccess.StudentDaoList;
+
 import java.util.Scanner;
 
 public class App {
     static Scanner scan = new Scanner(System.in);
+    CourseDaoList courseDao = new CourseDaoList();
+    StudentDaoList studentDao = new StudentDaoList();
 
     public static void main( String[] args ){
         boolean keepRun = true;

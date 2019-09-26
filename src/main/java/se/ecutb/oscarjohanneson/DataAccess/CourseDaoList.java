@@ -40,7 +40,7 @@ public class CourseDaoList implements CourseDao {
     @Override
     public List<Course> findByName(String name) {
         //Create a new ArrayList to store the course you are searching for in your ArrayList Courses.
-        //and makes it possible to return the exact course.
+        //and makes it possible to return the exact course by using the new ArrayList.
         List<Course> findByName = new ArrayList<>();
 
         for(Course c : courses){
