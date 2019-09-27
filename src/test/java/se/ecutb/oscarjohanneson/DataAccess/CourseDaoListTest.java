@@ -5,8 +5,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import se.ecutb.oscarjohanneson.Models.Course;
-
-import java.security.PublicKey;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -80,7 +78,7 @@ public class CourseDaoListTest {
     }
 
     @Test
-    public void test_if_course_with_startdate_is_found(){
+    public void test_if_course_with_startDate_is_found(){
         LocalDate date = LocalDate.parse("2019-08-01");
         List<Course> result = testObjectList.findByDate(date);
 
@@ -91,7 +89,7 @@ public class CourseDaoListTest {
     }
 
     @Test
-    public void test_if_course_with_startdate_is_not_found(){
+    public void test_if_course_with_startDate_is_not_found(){
         LocalDate date = LocalDate.parse("2019-09-01");
         List<Course> result = testObjectList.findByDate(date);
 
@@ -116,8 +114,8 @@ public class CourseDaoListTest {
     @Test
     public void test_if_course_was_removed_by_id(){
         int expectedSize = 1;
-        int testObjectid = 2;
-        testObjectList.removeCourse(testObjectid);
+        int testObjectId = 2;
+        testObjectList.removeCourse(testObjectId);
 
         Assert.assertEquals(expectedSize, testObjectList.findAll().size());
     }

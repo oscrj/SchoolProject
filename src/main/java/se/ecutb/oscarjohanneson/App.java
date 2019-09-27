@@ -1,6 +1,6 @@
 package se.ecutb.oscarjohanneson;
 
-import se.ecutb.oscarjohanneson.Interface.ConsoleProgram;
+import se.ecutb.oscarjohanneson.UserInterface.ConsoleProgram;
 
 public class App {
 

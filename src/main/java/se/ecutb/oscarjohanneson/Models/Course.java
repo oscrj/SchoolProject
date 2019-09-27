@@ -107,12 +107,7 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", courseName='" + courseName + '\'' +
-                ", startDate=" + startDate +
-                ", weekDuration=" + weekDuration +
-                ", students=" + students +
-                '}';
+        return " --- Course: --- " + "\nid = " + id + "\ncourseName = " + courseName  + "\nstartDate = " + startDate + "\nweekDuration = " + weekDuration +
+                "\nstudents = " + students;
     }
 }
