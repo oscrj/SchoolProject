@@ -104,4 +104,15 @@ public class Course {
     public int hashCode() {
         return Objects.hash(id, courseName, startDate, weekDuration, students);
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", courseName='" + courseName + '\'' +
+                ", startDate=" + startDate +
+                ", weekDuration=" + weekDuration +
+                ", students=" + students +
+                '}';
+    }
 }

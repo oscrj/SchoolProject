@@ -15,8 +15,9 @@ public class CourseDaoList implements CourseDao {
 
     @Override
     public Course saveCourse(Course course) {
+
         if(courses.contains(course)){
-            System.out.println("This course already exists.");
+            System.out.println(course.getCourseName() + " already exists.");
             return null;
         }else {
             courses.add(course);
@@ -47,10 +48,13 @@ public class CourseDaoList implements CourseDao {
             if(c.getCourseName().equalsIgnoreCase(name)){
                 //Adding course with the searched name in new ArrayList findByName.
                 findByName.add(c);
+                //Return the new ArrayList with the Course you searched for.
+                return findByName;
             }
         }
-        //Return the new ArrayList with the Course you searched for.
-        return findByName;
+        System.out.println("The course " + name + " can not be found.");
+        //Return null if name not found.
+        return null;
     }
 
     @Override
@@ -60,9 +64,11 @@ public class CourseDaoList implements CourseDao {
             if(c.getStartDate().isEqual(date)) {
                 //Adding the course with the date you are searching for to ArrayList findByDate.
                 findByDate.add(c);
+                return findByDate;
             }
         }
-        return findByDate;
+        System.out.println("The course can not be found.");
+        return null;
     }
 
     @Override
@@ -70,8 +76,14 @@ public class CourseDaoList implements CourseDao {
         return courses;
     }
 
+    public boolean removeCourse(int id) {
+        //Remove course with the unique id.
+        return removeCourse(findById(id));
+    }
+
     @Override
     public boolean removeCourse(Course course) {
+        System.out.println(course.getCourseName() + " was removed.");
         //Remove course from ArrayList.
         return courses.remove(course);
     }

@@ -16,7 +16,7 @@ public class StudentDaoList implements StudentDao {
     @Override
     public Student saveStudent(Student student) {
         if(students.contains(student)){
-            System.out.println(student.getName() + " is already attending this course.");
+            System.out.println(student.getName() + " is already existing");
             return null;
         }else{
             students.add(student);
@@ -43,15 +43,16 @@ public class StudentDaoList implements StudentDao {
     //Find student by searching for students name.
     @Override
     public List<Student> findByName(String name) {
-        //create a new ArrayList
+        List<Student> findByName = new ArrayList<>();
 
         for(Student s : students) {
             if (s.getName().equalsIgnoreCase(name)) {
-
+                findByName.add(s);
                 //Return the new ArrayList.
-                return students;
+                return findByName;
             }
         }
+        //If student name was not found.
         System.out.println("Student " + name + " not found");
         return null;
     }
@@ -75,6 +76,10 @@ public class StudentDaoList implements StudentDao {
         return students;
     }
 
+    public boolean deleteStudent(int id){
+        //Delete student by unique id.
+        return deleteStudent(findById(id));
+    }
     //Delete students from ArrayList.
     @Override
     public boolean deleteStudent(Student student) {
