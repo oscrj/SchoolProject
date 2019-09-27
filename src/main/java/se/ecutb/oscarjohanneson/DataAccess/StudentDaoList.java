@@ -16,11 +16,11 @@ public class StudentDaoList implements StudentDao {
     @Override
     public Student saveStudent(Student student) {
         if(students.contains(student)){
-            System.out.println(student.getName() + " is already existing");
+            System.out.println(student.getEmail() + " is already existing");
             return null;
         }else{
             students.add(student);
-            System.out.println(student.getName() + " was added.");
+            System.out.println("New student " + student.getName() + " was created.");
             return student;
         }
     }
