@@ -313,7 +313,6 @@ public class ConsoleProgram {
     }
 
     private static void editObjects() {
-
         boolean keepRun = true;
         while (keepRun){
             printEditObjectsMenu();
@@ -349,7 +348,23 @@ public class ConsoleProgram {
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
-
+                    int id = 0;
+                    try{
+                        id = Integer.parseInt(scan.nextLine());
+                    }catch (RuntimeException e){
+                        System.out.println(e + "Enter a name.");
+                    }
+                    //Set editStudent to the student with the unique ID.
+                    Student editStudent = studentDao.findById(id);
+                    //Create empty string that will be set by user input.
+                    String newName = "";
+                    try{
+                        newName = scan.nextLine();
+                    }catch (RuntimeException e){
+                        System.out.println(e + "Enter a name.");
+                    }
+                    //Set the student new name using setters in class Student.
+                    editStudent.setName(newName);
                     break;
                 case "2":
 
