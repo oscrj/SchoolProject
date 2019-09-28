@@ -18,5 +18,4 @@ public class StudentTest {
         Assert.assertEquals(expectedEmail, testStudent.getEmail());
         Assert.assertEquals(expectedAddress, testStudent.getAddress());
     }
-
 }

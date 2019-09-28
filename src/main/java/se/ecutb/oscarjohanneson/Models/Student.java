@@ -69,6 +69,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "\nStudent: " + "\tid = " + id + ",\tname = " + name + ",\temail = " + email + ",\taddress = " + address;
+        return "StudentId = " + id + ",\tName = " + name + ",\tEmail = " + email + ",\tAddress = " + address;
     }
 }

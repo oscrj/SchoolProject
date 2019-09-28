@@ -44,7 +44,6 @@ public class StudentDaoList implements StudentDao {
     @Override
     public List<Student> findByName(String name) {
         List<Student> findByName = new ArrayList<>();
-
         for(Student s : students) {
             if (s.getName().equalsIgnoreCase(name)) {
                 findByName.add(s);
@@ -76,10 +75,6 @@ public class StudentDaoList implements StudentDao {
         return students;
     }
 
-    public boolean deleteStudent(int id){
-        //Delete student by unique id.
-        return deleteStudent(findById(id));
-    }
     //Delete students from ArrayList.
     @Override
     public boolean deleteStudent(Student student) {

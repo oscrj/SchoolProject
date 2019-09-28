@@ -12,7 +12,7 @@ public class Course {
     private String courseName;
     private LocalDate startDate;
     private int weekDuration;
-    private List<Student> students;
+    private List<Student> attendingStudent;
 
     //Constructor used for testing.
     public Course(int id, String courseName, LocalDate startDate, int weekDuration) {
@@ -20,7 +20,7 @@ public class Course {
         this.courseName = courseName;
         this.startDate = startDate;
         this.weekDuration = weekDuration;
-        this.students = new ArrayList<>();
+        this.attendingStudent = new ArrayList<>();
     }
 
     //Constructor used for creating a course.
@@ -58,30 +58,30 @@ public class Course {
     }
 
     public List<Student> getStudents() {
-        return students;
+        return attendingStudent;
     }
 
     public void setStudents(List<Student> students) {
-        this.students = students;
+        this.attendingStudent = students;
     }
 
     //Method to add a student to course.
     public void register(Student student){
         //If student already is registered to this course.
-        if(students.contains(student)){
+        if(attendingStudent.contains(student)){
             System.out.println(student.getName() + " is already registered to this course.");
         }else{
             //Adding student to studentList.
-            students.add(student);
+            attendingStudent.add(student);
             System.out.println(student.getName() + " was added to this course");
         }
     }
 
     //Method to remove a student from course.
     public void unregister(Student student){
-        if(students.contains(student)){
+        if(attendingStudent.contains(student)){
             //Remove student from studentList.
-            students.remove(student);
+            attendingStudent.remove(student);
             System.out.println(student.getName() + " was removed.");
         }else{
             System.out.println("No object was found.");
@@ -97,17 +97,17 @@ public class Course {
                 weekDuration == course.weekDuration &&
                 Objects.equals(courseName, course.courseName) &&
                 Objects.equals(startDate, course.startDate) &&
-                Objects.equals(students, course.students);
+                Objects.equals(attendingStudent, course.attendingStudent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, courseName, startDate, weekDuration, students);
+        return Objects.hash(id, courseName, startDate, weekDuration, attendingStudent);
     }
 
     @Override
     public String toString() {
-        return "Course: " + "\tid = " + id + ",\tcourseName = " + courseName  + ",\tstartDate = " + startDate + ",\tweekDuration = " + weekDuration +
-                ",\tstudents = " + students+ "\n";
+        return "CourseId = " + id + ",\tCourseName = " + courseName  + ",\tStartDate = " + startDate + ",\tWeekDuration = " + weekDuration +
+                ",\tStudent attending: = " + attendingStudent+ "\n";
     }
 }

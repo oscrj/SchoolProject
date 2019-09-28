@@ -21,7 +21,7 @@ public class CourseDaoList implements CourseDao {
             return null;
         }else {
             courses.add(course);
-            System.out.println(course.getCourseName() + " was added.");
+            System.out.println("New course " + course.getCourseName() + " was added.");
             return course;
         }
     }
@@ -74,11 +74,6 @@ public class CourseDaoList implements CourseDao {
     @Override
     public List<Course> findAll() {
         return courses;
-    }
-
-    public boolean removeCourse(int id) {
-        //Remove course with the unique id.
-        return removeCourse(findById(id));
     }
 
     @Override

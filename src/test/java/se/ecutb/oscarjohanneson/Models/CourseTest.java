@@ -12,7 +12,6 @@ public class CourseTest {
     private Student testStudent2;
     private Course testObject;
 
-
     @Before
     public void setUp(){
         testStudent = new Student(1, "anna", "anna@gmail.com", "Storgatan 1");

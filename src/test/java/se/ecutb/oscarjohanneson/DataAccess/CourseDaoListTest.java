@@ -111,15 +111,6 @@ public class CourseDaoListTest {
         Assert.assertEquals(expectedSize, testObjectList.findAll().size());
     }
 
-    @Test
-    public void test_if_course_was_removed_by_id(){
-        int expectedSize = 1;
-        int testObjectId = 2;
-        testObjectList.removeCourse(testObjectId);
-
-        Assert.assertEquals(expectedSize, testObjectList.findAll().size());
-    }
-
     @After
     public void afterTest(){
         testObjectList.findAll().clear();

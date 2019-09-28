@@ -4,6 +4,7 @@ import se.ecutb.oscarjohanneson.DataAccess.CourseDaoList;
 import se.ecutb.oscarjohanneson.DataAccess.StudentDaoList;
 import se.ecutb.oscarjohanneson.Models.Course;
 import se.ecutb.oscarjohanneson.Models.Student;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -43,59 +44,48 @@ public class ConsoleProgram {
         }
     }
 
-    static void createNew() {
+    private static void createNew() {
         boolean keepRun = true;
         while (keepRun){
             ProgramMenu.printCreateNewMenu();
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
-                    //Create empty strings that later going to store user inputs.
-                    String name = "";
-                    String email = "";
-                    String address = "";
                     //Take input from user store it in variables.
-                    try{
-                        System.out.println("Enter your first name:");
-                        name = scan.nextLine();
+                    System.out.println("Enter your first name:");
+                    String name = scan.nextLine();
+                    System.out.println("Enter your email:");
+                    String email = scan.nextLine();
+                    System.out.println("Enter your address:");
+                    String address = scan.nextLine();
 
-                        System.out.println("Enter your email:");
-                        email = scan.nextLine();
-
-                        System.out.println("Enter your address:");
-                        address = scan.nextLine();
-
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter ");
+                    if(name.isEmpty() || email.isEmpty() || address.isEmpty()) {
+                        throw new NullPointerException("No student was created!" + " Please enter a Name, Email and Address.");
+                    }else {
+                        //Creating a student by using user inputs. StudentID will be created by the two co-working constructors in class student.
+                        Student newStudent = new Student(name, email, address);
+                        //Save student to studentDao ArrayList.
+                        studentDao.saveStudent(newStudent);
                     }
-                    //Creating a student by using user inputs. StudentID will be created by the two co-working constructors in class student.
-                    Student newStudent = new Student(name,email,address);
-                    //Save student to studentDao ArrayList.
-                    studentDao.saveStudent(newStudent);
                     break;
                 case "2":
-                    String courseName = "";
-                    String startDate = "";
-                    int weekDuration = 0;
-
                     //Take input from user store it in variables.
-                    try{
-                        System.out.println("Enter course name:");
-                        courseName = scan.nextLine();
-
-                        System.out.println("Enter start date of course. (YYYY-MM-DD):");
-                        startDate = scan.nextLine();
-
-                        System.out.println("Enter the duration of the course in number of weeks:");
-                        weekDuration = Integer.parseInt(scan.nextLine());
-
-                    }catch (RuntimeException e){
-                        System.out.println(e + " Please enter the name of the course\n The start date of the course: YYYY-MM-DD\n The number of week duration of the course.");
+                    System.out.println("Enter course name:");
+                    String courseName = scan.nextLine();
+                    System.out.println("Enter start date of course. (YYYY-MM-DD):");
+                    String startDate = scan.nextLine();
+                    System.out.println("Enter the duration of the course in number of weeks:");
+                    int  weekDuration = Integer.parseInt(scan.nextLine());
+                    if(courseName.isEmpty() || startDate.isEmpty()) {
+                        throw new NullPointerException("No student was created!" + " Please enter a CourseName and Start date (YYYY-MM-DD)");
+                    }else if(weekDuration <= 0) {
+                        System.out.println("No student was created!" + " Please enter course duration in numbers.");
+                    }else {
+                        //Create new course using inputs from user.
+                        Course newCourse = new Course(courseName, LocalDate.parse(startDate), weekDuration);
+                        //Save student to studentDao ArrayList.
+                        courseDao.saveCourse(newCourse);
                     }
-                    //Create new course using inputs from user.
-                    Course newCourse = new Course(courseName, LocalDate.parse(startDate), weekDuration);
-                    //Save student to studentDao ArrayList.
-                    courseDao.saveCourse(newCourse);
                     break;
                 case "B": case "b":
                     keepRun = false;
@@ -107,24 +97,48 @@ public class ConsoleProgram {
     }
 
     private static void registerUnregister() {
-        System.out.println("Register/Unregister students to courses menu");
-
         boolean keepRun = true;
         while (keepRun){
             ProgramMenu.printRegisterUnregisterMenu();
+            int studentId = 0;
+            int courseId = 0;
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
-
+                    try {
+                        System.out.println(courseDao.findAll().toString());
+                        System.out.print("Choose which Course you will register to by enter CourseID: ");
+                        courseId = Integer.parseInt(scan.nextLine());
+                    }catch (Exception e){
+                        System.out.println("Enter id by number");
+                    }
+                    try {
+                        System.out.println(studentDao.findAll().toString());
+                        System.out.print("Choose which Student you will register by enter StudentID: ");
+                        studentId = Integer.parseInt(scan.nextLine());
+                    }catch (Exception e){
+                        System.out.println("Enter id by number");
+                    }
+                    //Registered Student to course by using unique CourseId and StudentID.
+                    courseDao.findById(courseId).register(studentDao.findById(studentId));
                     break;
                 case "2":
-
-                    break;
-                case "3":
-
-                    break;
-                case "4":
-
+                    try {
+                        System.out.println(courseDao.findAll().toString());
+                        System.out.print("Choose which Course you will register to by enter CourseID: ");
+                        courseId = Integer.parseInt(scan.nextLine());
+                    }catch (Exception e){
+                        System.out.println("Enter id by number");
+                    }
+                    try {
+                        System.out.println(studentDao.findAll().toString());
+                        System.out.print("Choose which Student you will register by enter StudentID: ");
+                        studentId = Integer.parseInt(scan.nextLine());
+                    }catch (Exception e){
+                        System.out.println("Enter id by number");
+                    }
+                    //Unregistered Student from course by using unique CourseId and StudentID.
+                    courseDao.findById(courseId).unregister(studentDao.findById(studentId));
                     break;
                 case "B": case "b":
                     keepRun = false;
@@ -133,7 +147,6 @@ public class ConsoleProgram {
                     System.out.println("\nPlease select option 1 or 2. \nSelection B take you back to Main Menu.");
             }
         }
-
     }
 
     private static void findObjects() {
@@ -164,37 +177,32 @@ public class ConsoleProgram {
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
-                    int id = 0;
                     try{
                         System.out.print("Enter StudentID:\t");
-                        id = Integer.parseInt(scan.nextLine());
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter StudentID using numbers.");
+                        System.out.println(studentDao.findById(Integer.parseInt(scan.nextLine())).toString());
+                        scan.nextLine();
+                    }catch (Exception e){
+                        System.out.println("Enter StudentID using numbers.");
                     }
-                    System.out.println(studentDao.findById(id).toString());
-                    scan.nextLine();
                     break;
                 case "2":
-                    String name = "";
                     try{
                         System.out.print("Enter Student name:\t");
-                        name = scan.nextLine();
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter name you are looking for.");
+                        System.out.println(studentDao.findByName(scan.nextLine()).toString());
+                        scan.nextLine();
+                    }catch (NullPointerException e){
+                        System.out.println("Enter name you are looking for.");
                     }
-                    System.out.println(studentDao.findByName(name).toString());
-                    scan.nextLine();
                     break;
                 case "3":
                     String email = "";
                     try {
                         System.out.print("Enter an email:\t");
-                        email = scan.nextLine();
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter the email you are looking for.");
+                        System.out.println(studentDao.findByEmail(scan.nextLine()).toString());
+                        scan.nextLine();
+                    }catch (NullPointerException e){
+                        System.out.println("Enter the email you are looking for.");
                     }
-                    System.out.println(studentDao.findByEmail(email).toString());
-                    scan.nextLine();
                     break;
                 case "4":
                     System.out.println(studentDao.findAll().toString());
@@ -215,37 +223,32 @@ public class ConsoleProgram {
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
-                    int id = 0;
                     try{
                         System.out.print("Enter CourseID:\t");
-                        id = Integer.parseInt(scan.nextLine());
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter CourseID using numbers.");
+                        System.out.println(courseDao.findById(Integer.parseInt(scan.nextLine())).toString());
+                        scan.nextLine();
+                    }catch (Exception e){
+                        System.out.println("Enter CourseID using numbers.");
                     }
-                    System.out.println(courseDao.findById(id).toString());
-                    scan.nextLine();
                     break;
                 case "2":
-                    String name = "";
                     try{
                         System.out.print("Enter Course name:\t");
-                        name = scan.nextLine();
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter name you are looking for.");
+                        System.out.println(courseDao.findByName(scan.nextLine()).toString());
+                        scan.nextLine();
+                    }catch (NullPointerException e){
+                        System.out.println("Enter name you are looking for.");
                     }
-                    System.out.println(courseDao.findByName(name).toString());
-                    scan.nextLine();
                     break;
                 case "3":
                     LocalDate date = null;
                     try {
                         System.out.print("Enter start date of the course (YYYY-MM-DD):\t");
-                        date = LocalDate.parse(scan.nextLine());
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter date (YYYY-MM-DD)");
+                        System.out.println(courseDao.findByDate(LocalDate.parse(scan.nextLine())));
+                        scan.nextLine();
+                    }catch (Exception e){
+                        System.out.println("Enter date (YYYY-MM-DD)");
                     }
-                    System.out.println(courseDao.findByDate(date));
-                    scan.nextLine();
                     break;
                 case "4":
                     System.out.println(courseDao.findAll().toString());
@@ -275,7 +278,7 @@ public class ConsoleProgram {
                     keepRun = false;
                     break;
                 default:
-                    System.out.println("\nPlease select option 1 or 4. \nSelection B take you back toEdit Student/Course menu");
+                    System.out.println("\nPlease select option 1 or 2. \nSelection B take you back to Edit Student/Course menu");
             }
         }
     }
@@ -284,79 +287,67 @@ public class ConsoleProgram {
         boolean keepRun = true;
         while (keepRun){
             ProgramMenu.printEditStudentMenu();
-            String operator = scan.nextLine();
-            //Variable used to store StudentID.
-            int id = 0;
             //Create a new student that will store the student with the unique ID.
             Student editStudent;
+            String operator = scan.nextLine();
             switch (operator){
                 case "1":
-                    System.out.println("Find the student by searching on StudentID:");
                     try{
-                        id = Integer.parseInt(scan.nextLine());
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter StudentID.");
+                        System.out.print("Find the student by searching on StudentID: ");
+                        //Find student with the unique ID received by user and store it in editStudent.
+                        editStudent = studentDao.findById(Integer.parseInt(scan.nextLine()));
+                        System.out.print("Enter the new name of the student: ");
+                        //Set the new name received from user on the student with unique ID.
+                        editStudent.setName(scan.nextLine());
+                    }catch (NullPointerException e) {
+                        System.out.println(e);
                     }
-                    //Set editStudent to the student with the unique ID.
-                    editStudent = studentDao.findById(id);
-                    //Create empty string that will be set by user input.
-                    String newName = "";
-                    System.out.println("Enter the new name on the student.");
-                    try{
-                        newName = scan.nextLine();
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter a name.");
-                    }
-                    //Set the student new name using setters in class Student.
-                    editStudent.setName(newName);
                     break;
                 case "2":
-                    //int StudentId = 0;
-                    System.out.println("Find the student by searching on StudentID: ");
                     try{
-                        id = Integer.parseInt(scan.nextLine());
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter StudentID");
+                        System.out.print("Find the student by searching on StudentID: ");
+                        editStudent = studentDao.findById(Integer.parseInt(scan.nextLine()));
+                        System.out.print("Enter a new email: ");
+                        editStudent.setEmail(scan.nextLine());
+                    }catch (NullPointerException e){
+                        System.out.println(e);
                     }
-                    //Set editStudent to the student with the unique ID.
-                    editStudent = studentDao.findById(id);
-                    //Create empty string that will be set by user input.
-                    String newEmail = "";
-                    System.out.println("Enter a new email: ");
-                    try{
-                        newEmail = scan.nextLine();
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter a email.");
-                    }
-                    //Set the student new email using setters in class Student.
-                    editStudent.setEmail(newEmail);
                     break;
                 case "3":
-                    System.out.println("Find the student by searching on StudentID: ");
                     try{
-                        id = Integer.parseInt(scan.nextLine());
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter StudentID.");
+                        System.out.print("Find the student by searching on StudentID: ");
+                        editStudent = studentDao.findById(Integer.parseInt(scan.nextLine()));
+                        System.out.print("Enter a new address: ");
+                        editStudent.setAddress(scan.nextLine());
+                    }catch (NullPointerException e){
+                        System.out.println(e);
                     }
-                    editStudent = studentDao.findById(id);
-
-                    String newAddress = "";
-                    System.out.println("Enter a new address: ");
-                    try{
-                        newAddress = scan.nextLine();
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter a Adress.");
-                    }
-                    editStudent.setAddress(newAddress);
                     break;
                 case "4":
-                    System.out.println("Find the student by searching on StudentID: ");
                     try{
-                        id = Integer.parseInt(scan.nextLine());
-                    }catch (RuntimeException e){
-                        System.out.println(e + "Enter StudentID.");
+                        System.out.print("Find the student by searching on StudentID: ");
+                        editStudent = studentDao.findById(Integer.parseInt(scan.nextLine()));
+                        System.out.println(editStudent.toString());
+                        System.out.print("Do you want to delete this student :");
+                        System.out.println("\nYes(Y) / No(N) :");
+                        String opr = scan.nextLine();
+                        //A switch case to confirm that user wants to delete student.
+                        boolean run = true;
+                        while(run) {
+                            switch (opr) {
+                                case "Y": case "y":
+                                    //Delete student with unique ID.
+                                    studentDao.deleteStudent(editStudent);
+                                    run = false;
+                                    break;
+                                case "N": case "n":
+                                    run = false;
+                                    break;
+                            }
+                        }
+                    }catch (NullPointerException e){
+                        System.out.println(e);
                     }
-                    studentDao.deleteStudent(studentDao.findById(id));
                     break;
                 case "B": case "b":
                     keepRun = false;
@@ -371,19 +362,67 @@ public class ConsoleProgram {
         boolean keepRun = true;
         while (keepRun){
             ProgramMenu.printEditCourseMenu();
+            //Create a new Course that will store the course with the unique ID.
+            Course editCourse;
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
-
+                    try{
+                        System.out.print("Find the Course by enter CourseID: ");
+                        //Find course with the unique ID received by user and store it in editCourse.
+                        editCourse = courseDao.findById(Integer.parseInt(scan.nextLine()));
+                        System.out.print("Enter the new name of the course: ");
+                        //Set the new name received from user on the course with unique ID.
+                        editCourse.setCourseName(scan.nextLine());
+                    }catch (NullPointerException e) {
+                        System.out.println(e);
+                    }
                     break;
                 case "2":
-
+                    try{
+                        System.out.print("Find the Course by enter CourseID: ");
+                        editCourse = courseDao.findById(Integer.parseInt(scan.nextLine()));
+                        System.out.print("Enter a new start date (YYYY-MM-DD): ");
+                        editCourse.setStartDate(LocalDate.parse(scan.nextLine()));
+                    }catch (NullPointerException e) {
+                        System.out.println(e);
+                    }
                     break;
                 case "3":
-
+                    try{
+                        System.out.print("Find the Course by enter CourseID: ");
+                        editCourse = courseDao.findById(Integer.parseInt(scan.nextLine()));
+                        System.out.print("Enter new duration in weeks: ");
+                        editCourse.setWeekDuration(Integer.parseInt(scan.nextLine()));
+                    }catch (NullPointerException e) {
+                        System.out.println(e);
+                    }
                     break;
                 case "4":
-
+                    try{
+                        System.out.print("Find the Course by enter CourseID: ");
+                        editCourse = courseDao.findById(Integer.parseInt(scan.nextLine()));
+                        System.out.println("Do you want to delete this Course :");
+                        System.out.println(editCourse.toString());
+                        System.out.println("\nYes(Y) / No(N) :");
+                        String opr = scan.nextLine();
+                        //A switch case to confirm that user wants to delete course.
+                        boolean run = true;
+                        while(run) {
+                            switch (opr) {
+                                case "Y": case "y":
+                                    //Delete course with unique ID.
+                                    courseDao.removeCourse(editCourse);
+                                    run = false;
+                                    break;
+                                case "N": case "n":
+                                    run = false;
+                                    break;
+                            }
+                        }
+                    }catch (NullPointerException e) {
+                        System.out.println("Enter ID by number.");
+                    }
                     break;
                 case "B": case "b":
                     keepRun = false;
@@ -393,5 +432,4 @@ public class ConsoleProgram {
             }
         }
     }
-
 }
