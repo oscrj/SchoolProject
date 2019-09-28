@@ -14,12 +14,11 @@ public class ConsoleProgram {
     private static StudentDaoList studentDao = new StudentDaoList();
 
     public static void runProgram(){
-
         boolean keepRun = true;
         //As long keepRun is true the program will continue.
         while (keepRun){
             //call method printMenu().
-            printStartMenu();
+            ProgramMenu.printStartMenu();
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
@@ -44,20 +43,10 @@ public class ConsoleProgram {
         }
     }
 
-    private static void printStartMenu(){
-        System.out.println("\n ---- School Management ---- \n");
-        System.out.println("1.  Create new Coursers and Students");
-        System.out.println("2.  Register or remove Students to/from Courses");
-        System.out.println("3.  Find Students or Courses");
-        System.out.println("4.  Edit Students or Courses");
-        System.out.println("Q.  Quit program\n");
-    }
-
     static void createNew() {
-
         boolean keepRun = true;
         while (keepRun){
-            printCreateNewMenu();
+            ProgramMenu.printCreateNewMenu();
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
@@ -65,9 +54,8 @@ public class ConsoleProgram {
                     String name = "";
                     String email = "";
                     String address = "";
-
+                    //Take input from user store it in variables.
                     try{
-                        //Take input from user store it in name.
                         System.out.println("Enter your first name:");
                         name = scan.nextLine();
 
@@ -80,16 +68,17 @@ public class ConsoleProgram {
                     }catch (RuntimeException e){
                         System.out.println(e + "Enter ");
                     }
-                        //Creating a student by using user inputs. StudentID will be created by the two co-working constructors in class student.
-                        Student newStudent = new Student(name,email,address);
-                        //Save student to studentDao ArrayList.
-                        studentDao.saveStudent(newStudent);
+                    //Creating a student by using user inputs. StudentID will be created by the two co-working constructors in class student.
+                    Student newStudent = new Student(name,email,address);
+                    //Save student to studentDao ArrayList.
+                    studentDao.saveStudent(newStudent);
                     break;
                 case "2":
                     String courseName = "";
                     String startDate = "";
                     int weekDuration = 0;
 
+                    //Take input from user store it in variables.
                     try{
                         System.out.println("Enter course name:");
                         courseName = scan.nextLine();
@@ -103,8 +92,9 @@ public class ConsoleProgram {
                     }catch (RuntimeException e){
                         System.out.println(e + " Please enter the name of the course\n The start date of the course: YYYY-MM-DD\n The number of week duration of the course.");
                     }
-
+                    //Create new course using inputs from user.
                     Course newCourse = new Course(courseName, LocalDate.parse(startDate), weekDuration);
+                    //Save student to studentDao ArrayList.
                     courseDao.saveCourse(newCourse);
                     break;
                 case "B": case "b":
@@ -116,20 +106,12 @@ public class ConsoleProgram {
         }
     }
 
-    private static void printCreateNewMenu(){
-
-        System.out.println("\n ---- Create New ---- \n");
-        System.out.println("1.  Create new student");
-        System.out.println("2.  Create new course");
-        System.out.println("B.  Back to Main Menu\n");
-    }
-
     private static void registerUnregister() {
         System.out.println("Register/Unregister students to courses menu");
 
         boolean keepRun = true;
         while (keepRun){
-            printRegisterUnregisterMenu();
+            ProgramMenu.printRegisterUnregisterMenu();
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
@@ -154,17 +136,10 @@ public class ConsoleProgram {
 
     }
 
-    private static void printRegisterUnregisterMenu(){
-        System.out.println("\n ---- Register / Unregister ---- \n");
-        System.out.println("1.  Register student to course ");
-        System.out.println("2.  Unregister student from course");
-        System.out.println("B.  Back to Main Menu\n");
-    }
-
     private static void findObjects() {
         boolean keepRun = true;
         while (keepRun){
-            printFindObjectsMenu();
+            ProgramMenu.printFindObjectsMenu();
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
@@ -182,18 +157,10 @@ public class ConsoleProgram {
         }
     }
 
-    private static void printFindObjectsMenu(){
-        System.out.println("\n ---- Find Student / Course ---- \n");
-        System.out.println("1.  Find Student ");
-        System.out.println("2.  Find Course");
-        System.out.println("B.  Back to Main Menu\n");
-
-    }
-
     private static void findStudent(){
         boolean keepRun = true;
         while (keepRun){
-            printFindStudentMenu();
+            ProgramMenu.printFindStudentMenu();
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
@@ -241,20 +208,10 @@ public class ConsoleProgram {
         }
     }
 
-    private static void printFindStudentMenu(){
-        System.out.println("\n ---- Find Student ---- \n");
-        System.out.println("1.  Find Student by ID");
-        System.out.println("2.  Find Student by Name");
-        System.out.println("3.  Find Student by Email");
-        System.out.println("4.  Find all Students");
-        System.out.println("B.  Back to Find Student/Course menu\n");
-
-    }
-
     private static void findCourse(){
         boolean keepRun = true;
         while (keepRun){
-            printFindCourseMenu();
+            ProgramMenu.printFindCourseMenu();
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
@@ -302,20 +259,10 @@ public class ConsoleProgram {
         }
     }
 
-    private static void printFindCourseMenu(){
-        System.out.println("\n ---- Find Course ---- \n");
-        System.out.println("1.  Find Course by ID");
-        System.out.println("2.  Find Course by Name");
-        System.out.println("3.  Find Course by Date");
-        System.out.println("4.  Find all Courses");
-        System.out.println("B.  Back to Find Student/Course menu\n");
-
-    }
-
     private static void editObjects() {
         boolean keepRun = true;
         while (keepRun){
-            printEditObjectsMenu();
+            ProgramMenu.printEditObjectsMenu();
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
@@ -333,31 +280,28 @@ public class ConsoleProgram {
         }
     }
 
-    private static void printEditObjectsMenu(){
-        System.out.println("\n ---- Edit Student / Course ---- ");
-        System.out.println("1.  Edit Student ");
-        System.out.println("2.  Edit Course");
-        System.out.println("\n");
-        System.out.println("B.  Back to Main Menu\n");
-    }
-
-    public static void editStudent(){
+    private static void editStudent(){
         boolean keepRun = true;
         while (keepRun){
-            printEditStudentMenu();
+            ProgramMenu.printEditStudentMenu();
             String operator = scan.nextLine();
+            //Variable used to store StudentID.
+            int id = 0;
+            //Create a new student that will store the student with the unique ID.
+            Student editStudent;
             switch (operator){
                 case "1":
-                    int id = 0;
+                    System.out.println("Find the student by searching on StudentID:");
                     try{
                         id = Integer.parseInt(scan.nextLine());
                     }catch (RuntimeException e){
-                        System.out.println(e + "Enter a name.");
+                        System.out.println(e + "Enter StudentID.");
                     }
                     //Set editStudent to the student with the unique ID.
-                    Student editStudent = studentDao.findById(id);
+                    editStudent = studentDao.findById(id);
                     //Create empty string that will be set by user input.
                     String newName = "";
+                    System.out.println("Enter the new name on the student.");
                     try{
                         newName = scan.nextLine();
                     }catch (RuntimeException e){
@@ -367,13 +311,52 @@ public class ConsoleProgram {
                     editStudent.setName(newName);
                     break;
                 case "2":
-
+                    //int StudentId = 0;
+                    System.out.println("Find the student by searching on StudentID: ");
+                    try{
+                        id = Integer.parseInt(scan.nextLine());
+                    }catch (RuntimeException e){
+                        System.out.println(e + "Enter StudentID");
+                    }
+                    //Set editStudent to the student with the unique ID.
+                    editStudent = studentDao.findById(id);
+                    //Create empty string that will be set by user input.
+                    String newEmail = "";
+                    System.out.println("Enter a new email: ");
+                    try{
+                        newEmail = scan.nextLine();
+                    }catch (RuntimeException e){
+                        System.out.println(e + "Enter a email.");
+                    }
+                    //Set the student new email using setters in class Student.
+                    editStudent.setEmail(newEmail);
                     break;
                 case "3":
+                    System.out.println("Find the student by searching on StudentID: ");
+                    try{
+                        id = Integer.parseInt(scan.nextLine());
+                    }catch (RuntimeException e){
+                        System.out.println(e + "Enter StudentID.");
+                    }
+                    editStudent = studentDao.findById(id);
 
+                    String newAddress = "";
+                    System.out.println("Enter a new address: ");
+                    try{
+                        newAddress = scan.nextLine();
+                    }catch (RuntimeException e){
+                        System.out.println(e + "Enter a Adress.");
+                    }
+                    editStudent.setAddress(newAddress);
                     break;
                 case "4":
-
+                    System.out.println("Find the student by searching on StudentID: ");
+                    try{
+                        id = Integer.parseInt(scan.nextLine());
+                    }catch (RuntimeException e){
+                        System.out.println(e + "Enter StudentID.");
+                    }
+                    studentDao.deleteStudent(studentDao.findById(id));
                     break;
                 case "B": case "b":
                     keepRun = false;
@@ -384,19 +367,10 @@ public class ConsoleProgram {
         }
     }
 
-    private static void printEditStudentMenu() {
-        System.out.println("\n ---- Edit Student ---- \n");
-        System.out.println("1.  Edit Student Name");
-        System.out.println("2.  Edit Student Email");
-        System.out.println("3.  Edit Student Address");
-        System.out.println("4.  Delete Student");
-        System.out.println("B.  Back to Edit Student/Course menu\n");
-    }
-
     private static void editCourse(){
         boolean keepRun = true;
         while (keepRun){
-            printEditCourseMenu();
+            ProgramMenu.printEditCourseMenu();
             String operator = scan.nextLine();
             switch (operator){
                 case "1":
@@ -419,15 +393,5 @@ public class ConsoleProgram {
             }
         }
     }
-
-    private static void printEditCourseMenu() {
-        System.out.println("\n ---- Edit Course ---- \n");
-        System.out.println("1.  Edit Course Name");
-        System.out.println("2.  Edit Course Start date");
-        System.out.println("3.  Edit Course Duration");
-        System.out.println("4.  Delete Course");
-        System.out.println("B.  Back to Edit Student/Course menu\n");
-    }
-
 
 }
