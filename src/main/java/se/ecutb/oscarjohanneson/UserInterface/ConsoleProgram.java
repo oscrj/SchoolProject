@@ -58,9 +58,8 @@ public class ConsoleProgram {
                     String email = scan.nextLine();
                     System.out.println("Enter your address:");
                     String address = scan.nextLine();
-
                     if(name.isEmpty() || email.isEmpty() || address.isEmpty()) {
-                        throw new NullPointerException("No student was created!" + " Please enter a Name, Email and Address.");
+                        System.out.println("No student was created!" + " Please enter a Name, Email and Address.");
                     }else {
                         //Creating a student by using user inputs. StudentID will be created by the two co-working constructors in class student.
                         Student newStudent = new Student(name, email, address);
@@ -69,17 +68,20 @@ public class ConsoleProgram {
                     }
                     break;
                 case "2":
+                    int  weekDuration = 0;
                     //Take input from user store it in variables.
                     System.out.println("Enter course name:");
                     String courseName = scan.nextLine();
                     System.out.println("Enter start date of course. (YYYY-MM-DD):");
                     String startDate = scan.nextLine();
                     System.out.println("Enter the duration of the course in number of weeks:");
-                    int  weekDuration = Integer.parseInt(scan.nextLine());
-                    if(courseName.isEmpty() || startDate.isEmpty()) {
-                        throw new NullPointerException("No student was created!" + " Please enter a CourseName and Start date (YYYY-MM-DD)");
-                    }else if(weekDuration <= 0) {
-                        System.out.println("No student was created!" + " Please enter course duration in numbers.");
+                    try {
+                        weekDuration = Integer.parseInt(scan.nextLine());
+                    }catch (NumberFormatException e){
+                        System.out.println("Please enter a number.");
+                    }
+                    if(courseName.isEmpty() || startDate.isEmpty() || weekDuration <= 0) {
+                        System.out.println("No student was created!" + " Please enter a CourseName and Start date (YYYY-MM-DD) och number of weeks.");
                     }else {
                         //Create new course using inputs from user.
                         Course newCourse = new Course(courseName, LocalDate.parse(startDate), weekDuration);
@@ -191,7 +193,7 @@ public class ConsoleProgram {
                         System.out.println(studentDao.findByName(scan.nextLine()).toString());
                         scan.nextLine();
                     }catch (NullPointerException e){
-                        System.out.println("Enter name you are looking for.");
+                        System.out.println("Enter name of the student you are looking for.");
                     }
                     break;
                 case "3":

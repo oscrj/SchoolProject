@@ -61,10 +61,6 @@ public class Course {
         return attendingStudent;
     }
 
-    public void setStudents(List<Student> students) {
-        this.attendingStudent = students;
-    }
-
     //Method to add a student to course.
     public void register(Student student){
         //If student already is registered to this course.
