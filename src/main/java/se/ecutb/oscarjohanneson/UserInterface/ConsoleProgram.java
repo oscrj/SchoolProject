@@ -111,14 +111,14 @@ public class ConsoleProgram {
                         System.out.println(courseDao.findAll().toString());
                         System.out.print("Choose which Course you will register to by enter CourseID: ");
                         courseId = Integer.parseInt(scan.nextLine());
-                    }catch (Exception e){
+                    }catch (NumberFormatException e){
                         System.out.println("Enter id by number");
                     }
                     try {
                         System.out.println(studentDao.findAll().toString());
                         System.out.print("Choose which Student you will register by enter StudentID: ");
                         studentId = Integer.parseInt(scan.nextLine());
-                    }catch (Exception e){
+                    }catch (NumberFormatException e){
                         System.out.println("Enter id by number");
                     }
                     //Registered Student to course by using unique CourseId and StudentID.
@@ -129,14 +129,14 @@ public class ConsoleProgram {
                         System.out.println(courseDao.findAll().toString());
                         System.out.print("Choose which Course you will register to by enter CourseID: ");
                         courseId = Integer.parseInt(scan.nextLine());
-                    }catch (Exception e){
+                    }catch (NumberFormatException e){
                         System.out.println("Enter id by number");
                     }
                     try {
                         System.out.println(studentDao.findAll().toString());
                         System.out.print("Choose which Student you will register by enter StudentID: ");
                         studentId = Integer.parseInt(scan.nextLine());
-                    }catch (Exception e){
+                    }catch (NumberFormatException e){
                         System.out.println("Enter id by number");
                     }
                     //Unregistered Student from course by using unique CourseId and StudentID.
@@ -183,7 +183,7 @@ public class ConsoleProgram {
                         System.out.print("Enter StudentID:\t");
                         System.out.println(studentDao.findById(Integer.parseInt(scan.nextLine())).toString());
                         scan.nextLine();
-                    }catch (Exception e){
+                    }catch (NumberFormatException e){
                         System.out.println("Enter StudentID using numbers.");
                     }
                     break;
@@ -213,7 +213,7 @@ public class ConsoleProgram {
                     keepRun = false;
                     break;
                 default:
-                    System.out.println("\nPlease select option 1 or 4. \nSelection B take you back to Find Student/Course menu.");
+                    System.out.println("\nPlease select option 1 or 4. \nSelection B take you back to Find Student/Course Menu.");
             }
         }
     }
@@ -229,7 +229,7 @@ public class ConsoleProgram {
                         System.out.print("Enter CourseID:\t");
                         System.out.println(courseDao.findById(Integer.parseInt(scan.nextLine())).toString());
                         scan.nextLine();
-                    }catch (Exception e){
+                    }catch (NumberFormatException e){
                         System.out.println("Enter CourseID using numbers.");
                     }
                     break;
@@ -259,7 +259,7 @@ public class ConsoleProgram {
                     keepRun = false;
                     break;
                 default:
-                    System.out.println("\nPlease select option 1 or 4. \nSelection B take you back to Find Student/Course menu.");
+                    System.out.println("\nPlease select option 1 or 4. \nSelection B take you back to Find Student/Course Menu.");
             }
         }
     }
@@ -280,7 +280,7 @@ public class ConsoleProgram {
                     keepRun = false;
                     break;
                 default:
-                    System.out.println("\nPlease select option 1 or 2. \nSelection B take you back to Edit Student/Course menu");
+                    System.out.println("\nPlease select option 1 or 2. \nSelection B take you back to Main Menu");
             }
         }
     }
@@ -302,7 +302,7 @@ public class ConsoleProgram {
                         //Set the new name received from user on the student with unique ID.
                         editStudent.setName(scan.nextLine());
                     }catch (NullPointerException e) {
-                        System.out.println(e);
+                        System.out.println("Enter a name.");
                     }
                     break;
                 case "2":
@@ -312,7 +312,7 @@ public class ConsoleProgram {
                         System.out.print("Enter a new email: ");
                         editStudent.setEmail(scan.nextLine());
                     }catch (NullPointerException e){
-                        System.out.println(e);
+                        System.out.println("Enter a email");
                     }
                     break;
                 case "3":
@@ -322,7 +322,7 @@ public class ConsoleProgram {
                         System.out.print("Enter a new address: ");
                         editStudent.setAddress(scan.nextLine());
                     }catch (NullPointerException e){
-                        System.out.println(e);
+                        System.out.println("Enter a address");
                     }
                     break;
                 case "4":
@@ -348,14 +348,14 @@ public class ConsoleProgram {
                             }
                         }
                     }catch (NullPointerException e){
-                        System.out.println(e);
+                        System.out.println("Enter ID by number.");
                     }
                     break;
                 case "B": case "b":
                     keepRun = false;
                     break;
                 default:
-                    System.out.println("\nPlease select option 1 or 2. \nSelection B take you back to Main Menu.");
+                    System.out.println("\nPlease select option 1 or 4. \nSelection B take you back to Edit Student/Course Menu.");
             }
         }
     }
@@ -430,7 +430,7 @@ public class ConsoleProgram {
                     keepRun = false;
                     break;
                 default:
-                    System.out.println("\nPlease select option 1 or 4. \nSelection B take you back to Edit Student/Course menu");
+                    System.out.println("\nPlease select option 1 or 4. \nSelection B take you back to Edit Student/Course Menu");
             }
         }
     }

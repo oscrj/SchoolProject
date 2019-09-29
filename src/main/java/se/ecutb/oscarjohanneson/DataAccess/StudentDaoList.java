@@ -15,7 +15,8 @@ public class StudentDaoList implements StudentDao {
     //Add objects to ArrayList and return the same object.
     @Override
     public Student saveStudent(Student student) {
-        if(students.contains(student)){
+        //If a student email already exist the Student cant be created.
+        if(findByEmail(student.getEmail()) != null){
             System.out.println(student.getEmail() + " is already existing");
             return null;
         }else{
