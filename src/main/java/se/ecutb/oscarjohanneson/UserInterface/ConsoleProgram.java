@@ -70,14 +70,13 @@ public class ConsoleProgram {
                     break;
                 case "2":
                     try {
-                    int  weekDuration = 0;
                     //Take input from user store it in variables.
                     System.out.println("Enter course name:");
                     String courseName = scan.nextLine();
                     System.out.println("Enter start date of course. (YYYY-MM-DD):");
                     String startDate = scan.nextLine();
                     System.out.println("Enter the duration of the course in number of weeks:");
-                    weekDuration = Integer.parseInt(scan.nextLine());
+                    int weekDuration = Integer.parseInt(scan.nextLine());
                     if(courseName.isEmpty() || startDate.isEmpty() || weekDuration <= 0) {
                         System.out.println("No student was created!" + " Please enter a CourseName and Start date (YYYY-MM-DD) och number of weeks.");
                     }else {
