@@ -15,7 +15,6 @@ public class CourseDaoList implements CourseDao {
 
     @Override
     public Course saveCourse(Course course) {
-
         if(courses.contains(course)){
             System.out.println(course.getCourseName() + " already exists.");
             return null;
@@ -28,13 +27,12 @@ public class CourseDaoList implements CourseDao {
 
     @Override
     public Course findById(int id) {
-
         for(Course c : courses){
             if(c.getId() == id){
                 return c;
             }
         }
-        System.out.println("Course not found");
+        System.out.println("Course with that ID not found");
         return null;
     }
 
@@ -43,18 +41,21 @@ public class CourseDaoList implements CourseDao {
         //Create a new ArrayList to store the course you are searching for in your ArrayList Courses.
         //and makes it possible to return the exact course by using the new ArrayList.
         List<Course> findByName = new ArrayList<>();
-
         for(Course c : courses){
             if(c.getCourseName().equalsIgnoreCase(name)){
                 //Adding course with the searched name in new ArrayList findByName.
                 findByName.add(c);
-                //Return the new ArrayList with the Course you searched for.
-                return findByName;
             }
         }
-        System.out.println("The course " + name + " can not be found.");
-        //Return null if name not found.
-        return null;
+        if(findByName.isEmpty()) {
+            //If student name was not found.
+            System.out.println("The course " + name + " can not be found.");
+            //Return null if name not found.
+            return null;
+        }else {
+            //Return the new ArrayList with the Course you searched for.
+            return findByName;
+        }
     }
 
     @Override
@@ -64,11 +65,14 @@ public class CourseDaoList implements CourseDao {
             if(c.getStartDate().isEqual(date)) {
                 //Adding the course with the date you are searching for to ArrayList findByDate.
                 findByDate.add(c);
-                return findByDate;
             }
         }
-        System.out.println("The course can not be found.");
-        return null;
+        if(findByDate.isEmpty()) {
+            System.out.println("The course can not be found.");
+            return null;
+        }else {
+            return findByDate;
+        }
     }
 
     @Override

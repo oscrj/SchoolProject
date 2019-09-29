@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import se.ecutb.oscarjohanneson.Models.Course;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDaoListTest {
@@ -16,13 +17,9 @@ public class CourseDaoListTest {
 
     @Before
     public void setUp(){
-        testObject = new Course(1,"English", LocalDate.parse("2019-08-01"),8);
-        testObject2 = new Course(2, "Mathematics", LocalDate.parse("2019-08-03"), 8);
-
         testObjectList = new CourseDaoList();
-
-        testObjectList.saveCourse(testObject);
-        testObjectList.saveCourse(testObject2);
+        testObjectList.saveCourse(testObject = new Course(1,"English", LocalDate.parse("2019-08-01"),8));
+        testObjectList.saveCourse(testObject2 = new Course(2, "Mathematics", LocalDate.parse("2019-08-03"), 8));
     }
 
     @Test
@@ -62,11 +59,11 @@ public class CourseDaoListTest {
     public void test_if_course_was_found_by_name(){
         String name = "English";
         List<Course> result = testObjectList.findByName(name);
+        List<Course> testList = new ArrayList<>();
+        testList.add(testObject);
 
         Assert.assertNotNull(result);
-
-        //Have to check what is the difference?
-        //Assert.assertEquals(testObject, result);
+        Assert.assertEquals(testList, result);
     }
 
     @Test
@@ -81,11 +78,11 @@ public class CourseDaoListTest {
     public void test_if_course_with_startDate_is_found(){
         LocalDate date = LocalDate.parse("2019-08-01");
         List<Course> result = testObjectList.findByDate(date);
+        List<Course> testList = new ArrayList<>();
+        testList.add(testObject);
 
         Assert.assertNotNull(result);
-
-        //Have to check what is the difference?
-        //Assert.assertEquals(testObject, result);
+        Assert.assertEquals(testList, result);
     }
 
     @Test

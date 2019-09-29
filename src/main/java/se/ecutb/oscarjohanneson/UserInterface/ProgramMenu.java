@@ -4,10 +4,10 @@ public class ProgramMenu {
 
     public static void printStartMenu(){
         System.out.println("\n ---- School Management ---- \n");
-        System.out.println("1.  Create new Coursers and Students");
-        System.out.println("2.  Register or remove Students to/from Courses");
-        System.out.println("3.  Find Students or Courses");
-        System.out.println("4.  Edit Students or Courses");
+        System.out.println("1.  Create new Students / Courses");
+        System.out.println("2.  Register / remove Students to/from Courses");
+        System.out.println("3.  Find Students / Courses");
+        System.out.println("4.  Edit Students / Courses");
         System.out.println("Q.  Quit program\n");
     }
 
@@ -20,7 +20,7 @@ public class ProgramMenu {
 
     public static void printRegisterUnregisterMenu(){
         System.out.println("\n ---- Register / Unregister ---- \n");
-        System.out.println("1.  Register student to course ");
+        System.out.println("1.  Register student / course ");
         System.out.println("2.  Unregister student from course");
         System.out.println("B.  Back to Main Menu\n");
     }
@@ -30,7 +30,6 @@ public class ProgramMenu {
         System.out.println("1.  Find Student ");
         System.out.println("2.  Find Course");
         System.out.println("B.  Back to Main Menu\n");
-
     }
 
     public static void printFindStudentMenu(){
@@ -40,7 +39,6 @@ public class ProgramMenu {
         System.out.println("3.  Find Student by Email");
         System.out.println("4.  Find all Students");
         System.out.println("B.  Back to Find Student/Course menu\n");
-
     }
 
     public static void printFindCourseMenu(){
@@ -50,7 +48,6 @@ public class ProgramMenu {
         System.out.println("3.  Find Course by Date");
         System.out.println("4.  Find all Courses");
         System.out.println("B.  Back to Find Student/Course menu\n");
-
     }
 
     public static void printEditObjectsMenu(){

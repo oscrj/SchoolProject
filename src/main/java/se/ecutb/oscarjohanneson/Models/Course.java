@@ -13,7 +13,6 @@ public class Course {
     private LocalDate startDate;
     private int weekDuration;
     private List<Student> attendingStudent;
-
     //Constructor used for testing.
     public Course(int id, String courseName, LocalDate startDate, int weekDuration) {
         this.id = id;
@@ -22,12 +21,10 @@ public class Course {
         this.weekDuration = weekDuration;
         this.attendingStudent = new ArrayList<>();
     }
-
     //Constructor used for creating a course.
     public Course(String courseName, LocalDate startDate, int weekDuration){
         this(++idCounter, courseName, startDate, weekDuration);
     }
-
     //Getters and Setters
     public int getId() {
         return id;
@@ -103,7 +100,7 @@ public class Course {
 
     @Override
     public String toString() {
-        return "CourseId = " + id + ",\tCourseName = " + courseName  + ",\tStartDate = " + startDate + ",\tWeekDuration = " + weekDuration +
-                ",\tStudent attending: = " + attendingStudent+ "\n";
+        return "CourseId = " + id + ", CourseName = " + courseName  + ", StartDate = " + startDate + ", WeekDuration = " + weekDuration +
+                ", Student attending: = " + attendingStudent + "\n";
     }
 }

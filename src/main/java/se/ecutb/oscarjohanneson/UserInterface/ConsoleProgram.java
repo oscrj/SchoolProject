@@ -4,7 +4,6 @@ import se.ecutb.oscarjohanneson.DataAccess.CourseDaoList;
 import se.ecutb.oscarjohanneson.DataAccess.StudentDaoList;
 import se.ecutb.oscarjohanneson.Models.Course;
 import se.ecutb.oscarjohanneson.Models.Student;
-
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -108,15 +107,17 @@ public class ConsoleProgram {
             switch (operator){
                 case "1":
                     try {
+                        System.out.println(" --- List of Coursers: ---\n");
                         System.out.println(courseDao.findAll().toString());
-                        System.out.print("Choose which Course you will register to by enter CourseID: ");
+                        System.out.print("\nChoose which Course you will register to by enter CourseID: ");
                         courseId = Integer.parseInt(scan.nextLine());
                     }catch (NumberFormatException e){
                         System.out.println("Enter id by number");
                     }
                     try {
+                        System.out.println(" --- List of Students: ---\n");
                         System.out.println(studentDao.findAll().toString());
-                        System.out.print("Choose which Student you will register by enter StudentID: ");
+                        System.out.print("\nChoose which Student you will register by enter StudentID: ");
                         studentId = Integer.parseInt(scan.nextLine());
                     }catch (NumberFormatException e){
                         System.out.println("Enter id by number");
@@ -126,15 +127,17 @@ public class ConsoleProgram {
                     break;
                 case "2":
                     try {
+                        System.out.println(" --- List of Coursers: ---\n");
                         System.out.println(courseDao.findAll().toString());
-                        System.out.print("Choose which Course you will register to by enter CourseID: ");
+                        System.out.print("\nChoose which Course you will register to by enter CourseID: ");
                         courseId = Integer.parseInt(scan.nextLine());
                     }catch (NumberFormatException e){
                         System.out.println("Enter id by number");
                     }
                     try {
+                        System.out.println(" --- List of Students: ---\n");
                         System.out.println(studentDao.findAll().toString());
-                        System.out.print("Choose which Student you will register by enter StudentID: ");
+                        System.out.print("\nChoose which Student you will register by enter StudentID: ");
                         studentId = Integer.parseInt(scan.nextLine());
                     }catch (NumberFormatException e){
                         System.out.println("Enter id by number");
@@ -197,7 +200,6 @@ public class ConsoleProgram {
                     }
                     break;
                 case "3":
-                    String email = "";
                     try {
                         System.out.print("Enter an email:\t");
                         System.out.println(studentDao.findByEmail(scan.nextLine()).toString());
@@ -243,7 +245,6 @@ public class ConsoleProgram {
                     }
                     break;
                 case "3":
-                    LocalDate date = null;
                     try {
                         System.out.print("Enter start date of the course (YYYY-MM-DD):\t");
                         System.out.println(courseDao.findByDate(LocalDate.parse(scan.nextLine())));
@@ -295,10 +296,10 @@ public class ConsoleProgram {
             switch (operator){
                 case "1":
                     try{
-                        System.out.print("Find the student by searching on StudentID: ");
+                        System.out.print("Enter StudentID: ");
                         //Find student with the unique ID received by user and store it in editStudent.
                         editStudent = studentDao.findById(Integer.parseInt(scan.nextLine()));
-                        System.out.print("Enter the new name of the student: ");
+                        System.out.print("\nEnter the new name of the student: ");
                         //Set the new name received from user on the student with unique ID.
                         editStudent.setName(scan.nextLine());
                     }catch (NullPointerException e) {
@@ -307,9 +308,9 @@ public class ConsoleProgram {
                     break;
                 case "2":
                     try{
-                        System.out.print("Find the student by searching on StudentID: ");
+                        System.out.print("Enter StudentID: ");
                         editStudent = studentDao.findById(Integer.parseInt(scan.nextLine()));
-                        System.out.print("Enter a new email: ");
+                        System.out.print("\nEnter a new email: ");
                         editStudent.setEmail(scan.nextLine());
                     }catch (NullPointerException e){
                         System.out.println("Enter a email");
@@ -317,9 +318,9 @@ public class ConsoleProgram {
                     break;
                 case "3":
                     try{
-                        System.out.print("Find the student by searching on StudentID: ");
+                        System.out.print("Enter StudentID: ");
                         editStudent = studentDao.findById(Integer.parseInt(scan.nextLine()));
-                        System.out.print("Enter a new address: ");
+                        System.out.print("\nEnter a new address: ");
                         editStudent.setAddress(scan.nextLine());
                     }catch (NullPointerException e){
                         System.out.println("Enter a address");
@@ -327,10 +328,10 @@ public class ConsoleProgram {
                     break;
                 case "4":
                     try{
-                        System.out.print("Find the student by searching on StudentID: ");
+                        System.out.print("Enter StudentID: ");
                         editStudent = studentDao.findById(Integer.parseInt(scan.nextLine()));
                         System.out.println(editStudent.toString());
-                        System.out.print("Do you want to delete this student :");
+                        System.out.print("\nDo you want to delete this student :");
                         System.out.println("\nYes(Y) / No(N) :");
                         String opr = scan.nextLine();
                         //A switch case to confirm that user wants to delete student.
@@ -370,7 +371,7 @@ public class ConsoleProgram {
             switch (operator){
                 case "1":
                     try{
-                        System.out.print("Find the Course by enter CourseID: ");
+                        System.out.print("Enter CourseID: ");
                         //Find course with the unique ID received by user and store it in editCourse.
                         editCourse = courseDao.findById(Integer.parseInt(scan.nextLine()));
                         System.out.print("Enter the new name of the course: ");
@@ -382,7 +383,7 @@ public class ConsoleProgram {
                     break;
                 case "2":
                     try{
-                        System.out.print("Find the Course by enter CourseID: ");
+                        System.out.print("Enter CourseID: ");
                         editCourse = courseDao.findById(Integer.parseInt(scan.nextLine()));
                         System.out.print("Enter a new start date (YYYY-MM-DD): ");
                         editCourse.setStartDate(LocalDate.parse(scan.nextLine()));
@@ -392,7 +393,7 @@ public class ConsoleProgram {
                     break;
                 case "3":
                     try{
-                        System.out.print("Find the Course by enter CourseID: ");
+                        System.out.print("Enter CourseID: ");
                         editCourse = courseDao.findById(Integer.parseInt(scan.nextLine()));
                         System.out.print("Enter new duration in weeks: ");
                         editCourse.setWeekDuration(Integer.parseInt(scan.nextLine()));
@@ -402,13 +403,12 @@ public class ConsoleProgram {
                     break;
                 case "4":
                     try{
-                        System.out.print("Find the Course by enter CourseID: ");
+                        System.out.print("Enter CourseID: ");
                         editCourse = courseDao.findById(Integer.parseInt(scan.nextLine()));
                         System.out.println("Do you want to delete this Course :");
                         System.out.println(editCourse.toString());
                         System.out.println("\nYes(Y) / No(N) :");
                         String opr = scan.nextLine();
-                        //A switch case to confirm that user wants to delete course.
                         boolean run = true;
                         while(run) {
                             switch (opr) {

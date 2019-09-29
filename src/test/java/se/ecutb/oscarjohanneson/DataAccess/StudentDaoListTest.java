@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import se.ecutb.oscarjohanneson.Models.Student;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDaoListTest {
@@ -13,33 +14,29 @@ public class StudentDaoListTest {
     private Student testObject;
     private Student testObject2;
     private Student testObject3;
+    private Student testObject4;
     private StudentDaoList testObjectList;
 
     @Before
     public void setUp(){
-        //Created 3 testObjects.
-        testObject = new Student(1,"Anna", "anna@gmail.com","Storgatan 2");
-        testObject2 = new Student(2, "Anders", "Anders@Gmail.com", "Storgatan 5");
-        testObject3 = new Student(3, "Fredrik","fredrik@gmail.com", "Storgatan 10");
-
         testObjectList = new StudentDaoList();
-
-        //Added testObject to testObjectList.
-        testObjectList.saveStudent(testObject);
-        testObjectList.saveStudent(testObject2);
-        testObjectList.saveStudent(testObject3);
+        //Created and added testObject to testObjectList.
+        testObjectList.saveStudent(testObject = new Student(1,"Anna", "anna@gmail.com","Storgatan 2"));
+        testObjectList.saveStudent(testObject2 = new Student(2, "Anders", "Anders@Gmail.com", "Storgatan 5"));
+        testObjectList.saveStudent(testObject3 = new Student(3, "Fredrik","fredrik@gmail.com", "Storgatan 10"));
+        testObjectList.saveStudent(testObject4 = new Student(4,"Anna","anna2@gmail.com","Lillegatan"));
     }
 
     @Test
     public void test_if_student_was_saved(){
-        int expectedSize = 3;
+        int expectedSize = 4;
 
         Assert.assertEquals(expectedSize, testObjectList.findAll().size());
     }
 
     @Test
     public void test_if_student_already_saved_was_saved(){
-        int expectedSize = 3;
+        int expectedSize = 4;
         Student duplicateStudent = new Student(1,"Anna", "anna@gmail.com","Storgatan 2");
         testObjectList.saveStudent(duplicateStudent);
 
@@ -67,9 +64,12 @@ public class StudentDaoListTest {
     public void test_if_student_was_found_by_Name(){
         String name = "Anna";
         List<Student> result = testObjectList.findByName(name);
+        List<Student> testList = new ArrayList<>();
+        testList.add(testObject);
+        testList.add(testObject4);
 
         Assert.assertNotNull(result);
-        //Assert.assertEquals(testObject.toString(), result);
+        Assert.assertEquals(testList, result);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class StudentDaoListTest {
 
     @Test
     public void test_if_student_not_was_found_by_id(){
-        int id = 4;
+        int id = 5;
         Student result = testObjectList.findById(id);
 
         Assert.assertNull(result);
@@ -99,14 +99,14 @@ public class StudentDaoListTest {
 
     @Test
     public void test_find_all_students(){
-        int expectedSize = 3;
+        int expectedSize = 4;
 
         Assert.assertEquals(expectedSize, testObjectList.findAll().size());
     }
 
     @Test
     public void test_if_student_was_removed(){
-        int expectedSize = 2;
+        int expectedSize = 3;
         testObjectList.deleteStudent(testObject);
 
         Assert.assertEquals(expectedSize, testObjectList.findAll().size());

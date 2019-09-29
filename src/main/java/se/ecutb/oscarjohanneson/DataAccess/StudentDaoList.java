@@ -11,7 +11,6 @@ public class StudentDaoList implements StudentDao {
     public StudentDaoList() {
         students = new ArrayList<>();
     }
-
     //Add objects to ArrayList and return the same object.
     @Override
     public Student saveStudent(Student student) {
@@ -25,7 +24,6 @@ public class StudentDaoList implements StudentDao {
             return student;
         }
     }
-
     //Find student by searching for students email.
     @Override
     public Student findByEmail(String email) {
@@ -36,11 +34,8 @@ public class StudentDaoList implements StudentDao {
                 return s;
             }
         }
-        //if there are no match return null.
-        System.out.println("Student not found");
         return null;
     }
-
     //Find student by searching for students name.
     @Override
     public List<Student> findByName(String name) {
@@ -48,15 +43,17 @@ public class StudentDaoList implements StudentDao {
         for(Student s : students) {
             if (s.getName().equalsIgnoreCase(name)) {
                 findByName.add(s);
-                //Return the new ArrayList.
-                return findByName;
             }
         }
-        //If student name was not found.
-        System.out.println("Student " + name + " not found");
-        return null;
+        if(findByName.isEmpty()) {
+            //If student name was not found.
+            System.out.println("Student " + name + " not found");
+            return null;
+        }else {
+            //Return the new ArrayList.
+            return findByName;
+        }
     }
-
     //Find student by searching by students id.
     @Override
     public Student findById(int id) {
@@ -68,14 +65,12 @@ public class StudentDaoList implements StudentDao {
         System.out.println("Student not found");
         return null;
     }
-
     //Find all students in ArrayList.
     @Override
     public List<Student> findAll() {
         //Return ArrayList students.
         return students;
     }
-
     //Delete students from ArrayList.
     @Override
     public boolean deleteStudent(Student student) {

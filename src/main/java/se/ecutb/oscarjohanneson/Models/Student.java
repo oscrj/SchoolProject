@@ -9,7 +9,6 @@ public class Student {
     private String name;
     private String email;
     private String address;
-
     //Constructor used while testing.
     public Student(int id, String name, String email, String address) {
         this.id = id;
@@ -21,7 +20,6 @@ public class Student {
     public Student(String name, String email, String address) {
         this(++idCounter, name, email, address);
     }
-
     //Getters and setters
     public int getId() {
         return id;
@@ -69,6 +67,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "StudentId = " + id + ",\tName = " + name + ",\tEmail = " + email + ",\tAddress = " + address;
+        return "StudentId = " + id + ", " + name + ", " + email + ", " + address;
     }
 }
